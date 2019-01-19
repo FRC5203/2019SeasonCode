@@ -12,10 +12,14 @@ public class Drive {
 
     public static MecanumDrive robotDrive = new MecanumDrive(talon1, talon2, talon3, talon4);
 
-    public static void controllerDrive(double ySpeed, double xSpeed, double zRotation){
+    public static void controllerDrive(){
         
-        robotDrive.driveCartesian(ySpeed, xSpeed, zRotation);
-        
+        if(Robot.stick.getMagnitude() > 0.1 || Robot.stick.getRawAxis(4) > 0.1 || Robot.stick.getRawAxis(4) < -0.1) {
+            robotDrive.driveCartesian(Robot.stick.getY(), Robot.stick.getRawAxis(4), Robot.stick.getX());
+        }
+        else {
+            robotDrive.driveCartesian(0, 0, 0);
+        }
     }
 
 }
