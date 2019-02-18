@@ -58,6 +58,23 @@ public class Drive {
         }
     }
 
+    public static void placeHatch(){
+        //Camera middle x is 80, y is 60, for 120p
+        while(Robot.xEntry.getDouble(0) < 75 || Robot.xEntry.getDouble(0) > 85){
+            double speedModifier = 1.0f;
+            double currentDistance = Robot.xEntry.getDouble(0) - 80;
+            if(Math.abs(currentDistance) <= 20){
+                speedModifier = currentDistance * 0.05;
+            }
+            if(Robot.xEntry.getDouble(0) < 80){
+                Drive.robotDrive.driveCartesian(0.2 * speedModifier, 0, 0);
+            }
+            else if(Robot.xEntry.getDouble(0) > 85 && speedModifier >= 0.01f){
+                Drive.robotDrive.driveCartesian(-0.2 * speedModifier, 0, 0);
+            }
+        }
+    }
+
     public static void rotate(int angle){
         /* Note that roll is rotation around the x-axis and due to the position of the rio on the bot, 
         *  the x-axis is the axis that the robot will be turning around 
