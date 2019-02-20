@@ -37,6 +37,15 @@ public class Drive {
         else {
             robotDrive.driveCartesian(0, 0, 0);
         }
+        if(Robot.stick.getRawButton(1)){
+            Lotus.forward();
+        }
+        if(Robot.stick.getRawButton(2)){
+            Lotus.open();
+        }
+        if(Robot.stick.getRawButton(3)){
+            Lotus.close();
+        }
     }
 
     public static void timedDrive(double seconds){
@@ -60,15 +69,25 @@ public class Drive {
 
     public static void placeHatch(){
         //Camera middle x is 80, y is 60, for 120p
+        //While loop that runs while the center of the hatch isn't the center of the camera
         while(Robot.xEntry.getDouble(0) < 75 || Robot.xEntry.getDouble(0) > 85){
+            //A double that the driving speed gets multiplied by
             double speedModifier = 1.0f;
+            //How far the center of the hatch is from the center of the camera
             double currentDistance = Robot.xEntry.getDouble(0) - 80;
-            if(Math.abs(currentDistance) <= 20){
+            //A double to set the amount of pixels before the robot starts to slow
+            double threshold = 20;
+            //A function that makes it so once a threshold is met the robot slows by 50%, this happens 4 times
+            //Values are very much subject to change
+            if(Math.abs(currentDistance) <= threshold){
                 speedModifier = currentDistance * 0.05;
+                threshold -= 5;
             }
+            //Strafes the robot while the center of the hatch is to the left of the camera
             if(Robot.xEntry.getDouble(0) < 80){
                 Drive.robotDrive.driveCartesian(0.2 * speedModifier, 0, 0);
             }
+            //Strafes the robot while the center of the hatch is to the right of the camera
             else if(Robot.xEntry.getDouble(0) > 85 && speedModifier >= 0.01f){
                 Drive.robotDrive.driveCartesian(-0.2 * speedModifier, 0, 0);
             }
@@ -83,7 +102,7 @@ public class Drive {
         float totalAngle = 0;
         
         if(angle > 0){
-            while(totalAngle >= angle - 3){
+            while(!(totalAngle >= angle - 3)){
                 
                 totalAngle += ahrs.getRoll() - lastAngle;
 
@@ -93,7 +112,7 @@ public class Drive {
             }
         }
         else if (angle < 0){
-            while(totalAngle <= angle + 3){
+            while(!(totalAngle <= angle + 3)){
                 
                 totalAngle += ahrs.getRoll() - lastAngle;
 
