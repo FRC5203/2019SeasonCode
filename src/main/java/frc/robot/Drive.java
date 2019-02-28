@@ -34,7 +34,7 @@ public class Drive {
         if(Robot.stick.getMagnitude() > 0.2 || Robot.stick.getRawAxis(4) > 0.2 || Robot.stick.getRawAxis(4) < -0.2) {
             robotDrive.driveCartesian(-Robot.stick.getY(), Robot.stick.getRawAxis(4), Robot.stick.getX());
         }
-        else {
+        else {  
             robotDrive.driveCartesian(0, 0, 0);
         }
         if(Robot.stick.getRawButton(1)){
@@ -81,7 +81,6 @@ public class Drive {
             //Values are very much subject to change
             if(Math.abs(currentDistance) <= threshold){
                 speedModifier = currentDistance * 0.05;
-                threshold -= 5;
             }
             //Strafes the robot while the center of the hatch is to the left of the camera
             if(Robot.xEntry.getDouble(0) < 80){
