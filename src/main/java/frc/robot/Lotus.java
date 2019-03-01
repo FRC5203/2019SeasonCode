@@ -12,8 +12,7 @@ public class Lotus {
     public static DoubleSolenoid lotus = new DoubleSolenoid(2,3);
 
     public static void forward(){
-        track.set(true);
-        track2.set(true);
+        
     }
     public static void open(){
         lotus.set(DoubleSolenoid.Value.kOff);
