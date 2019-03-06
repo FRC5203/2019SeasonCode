@@ -10,6 +10,7 @@ package frc.robot;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.networktables.*;
@@ -23,6 +24,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
  * project.
  */
 public class Robot extends TimedRobot {
+
+
 
     //The controller (not just a single joystick)
     public static Joystick stick = new Joystick(0);
@@ -48,8 +51,9 @@ public class Robot extends TimedRobot {
     */
     @Override
     public void robotInit() {
+        Lotus.comp.setClosedLoopControl(true);
 
-        //Initialize the network table for team 5203
+        //Initialize the network table for team5203
         nTableInstance.startClientTeam(5203);
         
         sendableChooser.addOption("Cross the Line", "Line Cross");
@@ -97,6 +101,7 @@ public class Robot extends TimedRobot {
 
     @Override
     public void teleopPeriodic() {
+      
         Drive.controllerDrive();
     }
 

@@ -1,6 +1,7 @@
 package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.SPI;
@@ -13,6 +14,9 @@ public class Drive {
     public static WPI_TalonSRX rearLeft = new WPI_TalonSRX(2);
     public static WPI_TalonSRX frontRight = new WPI_TalonSRX(3);
     public static WPI_TalonSRX rearRight = new WPI_TalonSRX(4);
+
+    public static WPI_TalonSRX elev1 = new WPI_TalonSRX(7);
+    public static WPI_VictorSPX elev2 = new WPI_VictorSPX(6);
 
     //The navX-mxp gyro (it's the big purple board plugged into the rio)
     public static AHRS ahrs;
@@ -37,15 +41,17 @@ public class Drive {
         else {  
             robotDrive.driveCartesian(0, 0, 0);
         }
-        if(Robot.stick.getRawButton(1)){
-            Lotus.forward();
-        }
-        if(Robot.stick.getRawButton(2)){
+        if(Robot.stick.getRawButton(5)){
             Lotus.open();
         }
-        if(Robot.stick.getRawButton(3)){
+        if(Robot.stick.getRawButton(6)){
             Lotus.close();
         }
+    }
+
+    public static void extendElevatorTest(){
+        elev1.set(0.2);
+        elev2.set(-0.2);
     }
 
     public static void timedDrive(double seconds){
