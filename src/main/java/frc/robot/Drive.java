@@ -5,6 +5,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 
 public class Drive {
@@ -14,9 +15,6 @@ public class Drive {
     public static WPI_TalonSRX rearLeft = new WPI_TalonSRX(2);
     public static WPI_TalonSRX frontRight = new WPI_TalonSRX(3);
     public static WPI_TalonSRX rearRight = new WPI_TalonSRX(4);
-
-    public static WPI_TalonSRX elev1 = new WPI_TalonSRX(7);
-    public static WPI_VictorSPX elev2 = new WPI_VictorSPX(6);
 
     //The navX-mxp gyro (it's the big purple board plugged into the rio)
     public static AHRS ahrs;
@@ -33,25 +31,14 @@ public class Drive {
 
     public static MecanumDrive robotDrive = new MecanumDrive(frontLeft, rearLeft, frontRight, rearRight);
 
-    public static void controllerDrive(){
-        
-        if(Robot.stick.getMagnitude() > 0.2 || Robot.stick.getRawAxis(4) > 0.2 || Robot.stick.getRawAxis(4) < -0.2) {
-            robotDrive.driveCartesian(-Robot.stick.getY(), Robot.stick.getRawAxis(4), Robot.stick.getX());
-        }
-        else {  
-            robotDrive.driveCartesian(0, 0, 0);
-        }
-        if(Robot.stick.getRawButton(5)){
-            Lotus.open();
-        }
-        if(Robot.stick.getRawButton(6)){
-            Lotus.close();
-        }
-    }
-
-    public static void extendElevatorTest(){
-        elev1.set(0.2);
-        elev2.set(-0.2);
+    /**
+     * Function for driving the robot with mecanum wheels with given y,x,z inputs (most likely from a joystick)
+     * @param y The value for driving the robot forward and backward (positive = forward, negative = reverse)
+     * @param x The value for strafing on the mecanum wheels (positive = right, negative = left)
+     * @param z The value for rotating (spinning) the robot (postive = clockwise, negative = counterclockwise)
+     */
+    public static void defaultDrive(double y, double x, double z){
+        robotDrive.driveCartesian(y, x, z);
     }
 
     public static void timedDrive(double seconds){

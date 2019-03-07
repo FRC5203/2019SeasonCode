@@ -51,7 +51,7 @@ public class Robot extends TimedRobot {
     */
     @Override
     public void robotInit() {
-        Lotus.comp.setClosedLoopControl(true);
+        //Lotus.comp.setClosedLoopControl(true);
 
         //Initialize the network table for team5203
         nTableInstance.startClientTeam(5203);
@@ -102,7 +102,8 @@ public class Robot extends TimedRobot {
     @Override
     public void teleopPeriodic() {
       
-        Drive.controllerDrive();
+        ControllerMap.registerInput();
+        
     }
 
     @Override
