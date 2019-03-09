@@ -30,17 +30,6 @@ public class Drive {
     }
 
     public static MecanumDrive robotDrive = new MecanumDrive(frontLeft, rearLeft, frontRight, rearRight);
-
-    /**
-     * Function for driving the robot with mecanum wheels with given y,x,z inputs (most likely from a joystick)
-     * @param y The value for driving the robot forward and backward (positive = forward, negative = reverse)
-     * @param x The value for strafing on the mecanum wheels (positive = right, negative = left)
-     * @param z The value for rotating (spinning) the robot (postive = clockwise, negative = counterclockwise)
-     */
-    public static void defaultDrive(double y, double x, double z){
-        robotDrive.driveCartesian(y, x, z);
-    }
-
     public static void timedDrive(double seconds){
         double startTime = System.currentTimeMillis();
 
@@ -85,7 +74,9 @@ public class Drive {
             }
         }
     }
-
+    
+    
+    
     public static void rotate(int angle){
         /* Note that roll is rotation around the x-axis and due to the position of the rio on the bot, 
         *  the x-axis is the axis that the robot will be turning around 

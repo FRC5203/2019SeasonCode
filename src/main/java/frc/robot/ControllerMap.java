@@ -41,11 +41,13 @@ public class ControllerMap{
         if(Robot.stick.getRawButton(BUTTON_ELEVATOR_UP_TEST)){
             //Elevator.upTest();
         }
+        
         if(Robot.stick.getMagnitude() > 0.1 || (Robot.stick.getRawAxis(AXIS_STRAFE) > 0.1 || Robot.stick.getRawAxis(AXIS_STRAFE) < -0.1)){
-            Drive.defaultDrive(-Robot.stick.getRawAxis(AXIS_Y_DRIVE), Robot.stick.getRawAxis(AXIS_STRAFE), Robot.stick.getRawAxis(AXIS_SPIN));
+            System.out.println(-Robot.stick.getY() + ", " + Robot.stick.getRawAxis(AXIS_STRAFE) + ", " + Robot.stick.getX());
+            Drive.robotDrive.driveCartesian(Robot.stick.getRawAxis(4), Robot.stick.getY(), Robot.stick.getX());
         }
         else{
-            Drive.defaultDrive(0,0,0);
+            Drive.robotDrive.driveCartesian(0, 0, 0);
         }
     }
 
