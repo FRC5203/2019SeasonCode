@@ -48,34 +48,6 @@ public class Drive {
             robotDrive.driveCartesian(0, fixedSpeed, 0);
         }
     }
-
-    public static void placeHatch(){
-        //Camera middle x is 80, y is 60, for 120p
-        //While loop that runs while the center of the hatch isn't the center of the camera
-        while(Robot.xEntry.getDouble(0) < 75 || Robot.xEntry.getDouble(0) > 85){
-            //A double that the driving speed gets multiplied by
-            double speedModifier = 1.0f;
-            //How far the center of the hatch is from the center of the camera
-            double currentDistance = Robot.xEntry.getDouble(0) - 80;
-            //A double to set the amount of pixels before the robot starts to slow
-            double threshold = 20;
-            //A function that makes it so once a threshold is met the robot slows by 50%, this happens 4 times
-            //Values are very much subject to change
-            if(Math.abs(currentDistance) <= threshold){
-                speedModifier = currentDistance * 0.05;
-            }
-            //Strafes the robot while the center of the hatch is to the left of the camera
-            if(Robot.xEntry.getDouble(0) < 80){
-                Drive.robotDrive.driveCartesian(0.2 * speedModifier, 0, 0);
-            }
-            //Strafes the robot while the center of the hatch is to the right of the camera
-            else if(Robot.xEntry.getDouble(0) > 85 && speedModifier >= 0.01f){
-                Drive.robotDrive.driveCartesian(-0.2 * speedModifier, 0, 0);
-            }
-        }
-    }
-    
-    
     
     public static void rotate(int angle){
         /* Note that roll is rotation around the x-axis and due to the position of the rio on the bot, 

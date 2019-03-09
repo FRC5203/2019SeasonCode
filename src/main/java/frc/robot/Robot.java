@@ -60,10 +60,10 @@ public class Robot extends TimedRobot {
         sendableChooser.addOption("Rocketship", "Rocket");
         sendableChooser.addOption("Cargo Ship", "Cargo");
 
-        for(WPI_TalonSRX talon : new WPI_TalonSRX[]{Drive.frontLeft, Drive.rearLeft, Drive.frontRight, Drive.rearRight}){
-            talon.configPeakCurrentLimit(25);
+        for(WPI_TalonSRX talon : new WPI_TalonSRX[]{Drive.frontLeft, Drive.rearLeft, Drive.frontRight, Drive.rearRight, Elevator.elev1}){
+            talon.configPeakCurrentLimit(30);
             talon.configPeakCurrentDuration(1);
-            talon.configContinuousCurrentLimit(25);
+            talon.configContinuousCurrentLimit(30);
             talon.enableCurrentLimit(true);
         }
   
@@ -102,7 +102,8 @@ public class Robot extends TimedRobot {
     @Override
     public void teleopPeriodic() {
       
-        ControllerMap.registerInput();
+        //ControllerMap.registerInput();
+        Elevator.upTest();  
    
     }
 
