@@ -60,7 +60,7 @@ public class Robot extends TimedRobot {
         sendableChooser.addOption("Rocketship", "Rocket");
         sendableChooser.addOption("Cargo Ship", "Cargo");
 
-        for(WPI_TalonSRX talon : new WPI_TalonSRX[]{Drive.frontLeft, Drive.rearLeft, Drive.frontRight, Drive.rearRight, Elevator.elev1}){
+        for(WPI_TalonSRX talon : new WPI_TalonSRX[]{Drive.frontLeft, Drive.rearLeft, Drive.frontRight, Drive.rearRight}){
             talon.configPeakCurrentLimit(30);
             talon.configPeakCurrentDuration(1);
             talon.configContinuousCurrentLimit(30);
