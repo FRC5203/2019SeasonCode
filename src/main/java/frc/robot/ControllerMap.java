@@ -31,7 +31,8 @@ public class ControllerMap{
             Lotus.close();
         }
         */
-        /*if(Robot.stick.getRawButton(BUTTON_START_VISION)){
+
+        if(Robot.stick.getRawButton(BUTTON_START_VISION)){
             //Camera middle x is 80, y is 60, for 120p
             //While loop that runs while the center of the hatch isn't the center of the camera
             while(Robot.xEntry.getDouble(0) < 78 || Robot.xEntry.getDouble(0) > 82){
@@ -56,8 +57,8 @@ public class ControllerMap{
         else{
             Drive.robotDrive.driveCartesian(0, 0, 0);
         }
-        */
-        /*if(Robot.stick.getRawButton(BUTTON_STOPALL)){
+        
+        if(Robot.stick.getRawButton(BUTTON_STOPALL)){
             //Robot.enableVisionEntry.setBoolean(false);
             //TODO add any other code needed for stopping all process on the robot
         }
@@ -68,16 +69,17 @@ public class ControllerMap{
             Elevator.upTest();
         }
         
-        /*if(Robot.stick.getMagnitude() > 0.1 || (Robot.stick.getRawAxis(AXIS_STRAFE) > 0.1 || Robot.stick.getRawAxis(AXIS_STRAFE) < -0.1)){
+        if(Robot.stick.getMagnitude() > 0.1 || (Robot.stick.getRawAxis(AXIS_STRAFE) > 0.1 || Robot.stick.getRawAxis(AXIS_STRAFE) < -0.1)){
             System.out.println(-Robot.stick.getY() + ", " + Robot.stick.getRawAxis(AXIS_STRAFE) + ", " + Robot.stick.getX());
             Drive.robotDrive.driveCartesian(Robot.stick.getRawAxis(4), -Robot.stick.getY(), Robot.stick.getX());
         }
         else{
             Drive.robotDrive.driveCartesian(0, 0, 0);
         }
-        */
-    }
+        if(Robot.stick.getRawAxis(2) >= 0.1 || Robot.stick.getRawAxis(2) <= -0.1){
+            Drive.robotDrive.driveCartesian(0,-0.2, 0);
+        }
 
-    
+    }
 
 }
