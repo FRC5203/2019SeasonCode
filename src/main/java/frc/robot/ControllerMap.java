@@ -24,18 +24,19 @@ public class ControllerMap{
     private static boolean startVision = false;
 
     public static void registerInput(){
-       /* if(Robot.stick.getRawButton(BUTTON_LOTUS_OPEN)){
+       if(Robot.stick.getRawButton(BUTTON_LOTUS_OPEN)){
             Lotus.open();
         }
         else if(Robot.stick.getRawButton(BUTTON_LOTUS_CLOSE)){
             Lotus.close();
         }
-        */
+        
 
-        if(Robot.stick.getRawButton(BUTTON_START_VISION)){
+        
             //Camera middle x is 80, y is 60, for 120p
             //While loop that runs while the center of the hatch isn't the center of the camera
-            while(Robot.xEntry.getDouble(0) < 78 || Robot.xEntry.getDouble(0) > 82){
+        if(Robot.stick.getRawButton(2)){
+            if(Robot.xEntry.getDouble(0) < 78 || Robot.xEntry.getDouble(0) > 82){
                 //How far the center of the hatch is from the center of the camera
                 double currentDistance = Robot.xEntry.getDouble(0) - 80;
                 //A double to set the amount of pixels before the robot starts to slow
@@ -51,12 +52,13 @@ public class ControllerMap{
                     Drive.robotDrive.driveCartesian(-0.55,0,0 );
                 }
             }
-            System.out.println("Reached target for vision");
-            Drive.robotDrive.driveCartesian(0, 0, 0);
         }
-        else{
-            Drive.robotDrive.driveCartesian(0, 0, 0);
-        }
+        
+            
+            
+        
+        
+        
         
         if(Robot.stick.getRawButton(BUTTON_STOPALL)){
             //Robot.enableVisionEntry.setBoolean(false);
@@ -65,9 +67,10 @@ public class ControllerMap{
         //if(Robot.stick.getRawButton(BUTTON_ELEVATOR_EXTEND)){
             //Elevator.extend();
         //}
-        if(Robot.stick.getRawButton(BUTTON_ELEVATOR_UP_TEST)){
+        /*if(Robot.stick.getRawButton(BUTTON_ELEVATOR_UP_TEST)){
             Elevator.upTest();
         }
+        */
         
         if(Robot.stick.getMagnitude() > 0.1 || (Robot.stick.getRawAxis(AXIS_STRAFE) > 0.1 || Robot.stick.getRawAxis(AXIS_STRAFE) < -0.1)){
             System.out.println(-Robot.stick.getY() + ", " + Robot.stick.getRawAxis(AXIS_STRAFE) + ", " + Robot.stick.getX());
@@ -77,7 +80,13 @@ public class ControllerMap{
             Drive.robotDrive.driveCartesian(0, 0, 0);
         }
         if(Robot.stick.getRawAxis(2) >= 0.1 || Robot.stick.getRawAxis(2) <= -0.1){
-            Drive.robotDrive.driveCartesian(0,-0.2, 0);
+            Drive.robotDrive.driveCartesian(0,0.2, 0);
+        }
+        if(Robot.stick.getRawButton(1)){
+            Elevator.extend();
+        }
+        else if(Robot.stick.getRawButton(3)){
+            Elevator.detract();
         }
 
     }
