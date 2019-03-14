@@ -21,8 +21,6 @@ public class ControllerMap{
     //Should be the vertical axis on the left joystick
     private static int AXIS_Y_DRIVE = 1;
 
-    private static boolean startVision = false;
-
     public static void registerInput(){
        if(Robot.stick.getRawButton(BUTTON_LOTUS_OPEN)){
             Lotus.open();
@@ -35,7 +33,7 @@ public class ControllerMap{
         
             //Camera middle x is 80, y is 60, for 120p
             //While loop that runs while the center of the hatch isn't the center of the camera
-        if(Robot.stick.getRawButton(2)){
+        if(Robot.stick.getRawButton(BUTTON_START_VISION)){
             if(Robot.xEntry.getDouble(0) < 78 || Robot.xEntry.getDouble(0) > 82){
                 //How far the center of the hatch is from the center of the camera
                 double currentDistance = Robot.xEntry.getDouble(0) - 80;
@@ -54,24 +52,7 @@ public class ControllerMap{
             }
         }
         
-            
-            
-        
-        
-        
-        
-        if(Robot.stick.getRawButton(BUTTON_STOPALL)){
-            //Robot.enableVisionEntry.setBoolean(false);
-            //TODO add any other code needed for stopping all process on the robot
-        }
-        //if(Robot.stick.getRawButton(BUTTON_ELEVATOR_EXTEND)){
-            //Elevator.extend();
-        //}
-        /*if(Robot.stick.getRawButton(BUTTON_ELEVATOR_UP_TEST)){
-            Elevator.upTest();
-        }
-        */
-        
+        //if statement to drive the robot
         if(Robot.stick.getMagnitude() > 0.1 || (Robot.stick.getRawAxis(AXIS_STRAFE) > 0.1 || Robot.stick.getRawAxis(AXIS_STRAFE) < -0.1)){
             System.out.println(-Robot.stick.getY() + ", " + Robot.stick.getRawAxis(AXIS_STRAFE) + ", " + Robot.stick.getX());
             Drive.robotDrive.driveCartesian(Robot.stick.getRawAxis(4), -Robot.stick.getY(), Robot.stick.getX());
@@ -79,12 +60,15 @@ public class ControllerMap{
         else{
             Drive.robotDrive.driveCartesian(0, 0, 0);
         }
+        //Slow drive forward for hatch placement
         if(Robot.stick.getRawAxis(2) >= 0.1 || Robot.stick.getRawAxis(2) <= -0.1){
             Drive.robotDrive.driveCartesian(0,0.2, 0);
         }
+        //Extends the elevator(WIP)
         if(Robot.stick.getRawButton(1)){
             Elevator.extend();
         }
+        //Detracts the elevator(WIP)
         else if(Robot.stick.getRawButton(3)){
             Elevator.detract();
         }

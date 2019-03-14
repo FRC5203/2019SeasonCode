@@ -14,6 +14,7 @@ public class Elevator{
     //Creating the talons for the elevator motors
     public static WPI_VictorSPX elev1 = new WPI_VictorSPX(6);
 
+    //Puts the elevator motor into brake mode, so that it doesn't move when no input is given
     static{
         elev1.setNeutralMode(NeutralMode.Brake);
     }
@@ -23,6 +24,7 @@ public class Elevator{
     public static void extend(){
         track.set(DoubleSolenoid.Value.kForward);
     }
+    //Function to move the robot backwards on its track
     public static void detract(){
         track.set(DoubleSolenoid.Value.kReverse);
     }
