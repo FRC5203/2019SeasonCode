@@ -51,8 +51,10 @@ public class Robot extends TimedRobot {
     */
     @Override
     public void robotInit() {
-        Lotus.comp.setClosedLoopControl(true);
 
+        //Enable this only when not using pnuematics
+        Lotus.comp.setClosedLoopControl(false);
+        
         //Initialize the network table for team5203
         nTableInstance.startClientTeam(5203);
         
