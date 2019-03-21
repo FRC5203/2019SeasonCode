@@ -105,6 +105,9 @@ public class Robot extends TimedRobot {
     public void teleopPeriodic() {
       
         ControllerMap.registerInput(); 
+        if(Elevator.runElevator){
+            Elevator.moveToTargetSwitch();
+        }
    
     }
 

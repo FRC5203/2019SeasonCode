@@ -42,7 +42,7 @@ public class Drive {
         double inchesPerSecond = 0;
         double startTime = System.currentTimeMillis();
         double elapsedTime = 0;
-
+        
         while(elapsedTime * inchesPerSecond < inches){
             elapsedTime += System.currentTimeMillis() - startTime;
             robotDrive.driveCartesian(0, fixedSpeed, 0);

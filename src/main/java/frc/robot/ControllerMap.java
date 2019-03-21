@@ -43,6 +43,7 @@ public class ControllerMap{
 
                 if(currentDistance > 0){
                     Drive.robotDrive.driveCartesian(0, 1, 0);
+                    
                 }
                 else if(currentDistance < 0){
                     Drive.robotDrive.driveCartesian(0, -1, 0);
@@ -70,12 +71,24 @@ public class ControllerMap{
         }
 
         //Extends the elevator(WIP)
-        if(Robot.stick.getRawButton(BUTTON_ELEVATOR_OUT)){
-            Elevator.extend();
-        }
+        //if(Robot.stick.getRawButton(BUTTON_ELEVATOR_OUT)){
+          //  Elevator.extend();
+        //}
         //Detracts the elevator(WIP)
-        else if(Robot.stick.getRawButton(BUTTON_ELEVATOR_IN)){
-            Elevator.detract();
+        //else if(Robot.stick.getRawButton(BUTTON_ELEVATOR_IN)){
+          //  Elevator.detract();
+        //}
+        if(Robot.stick.getRawButton(1)){
+            Elevator.targetSwitch = Elevator.switch1;
+            Elevator.runElevator = true;
+        }
+        if(Robot.stick.getRawButton(3)){
+            Elevator.targetSwitch = Elevator.switch2;
+            Elevator.runElevator = true;
+        }
+        if(Robot.stick.getRawButton(4)){
+            Elevator.targetSwitch = Elevator.switch3;
+            Elevator.runElevator = true;
         }
 
     }
