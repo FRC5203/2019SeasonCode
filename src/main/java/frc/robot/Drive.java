@@ -15,7 +15,9 @@ public class Drive {
     public static WPI_TalonSRX rearLeft = new WPI_TalonSRX(2);
     public static WPI_TalonSRX frontRight = new WPI_TalonSRX(3);
     public static WPI_TalonSRX rearRight = new WPI_TalonSRX(4);
-
+    
+    public static MecanumDrive robotDrive = new MecanumDrive(frontLeft, rearLeft, frontRight, rearRight);
+    
     //The navX-mxp gyro (it's the big purple board plugged into the rio)
     public static AHRS ahrs;
 
@@ -29,7 +31,7 @@ public class Drive {
         ahrs = new AHRS(SPI.Port.kMXP);
     }
 
-    public static MecanumDrive robotDrive = new MecanumDrive(frontLeft, rearLeft, frontRight, rearRight);
+    
     public static void timedDrive(double seconds){
         double startTime = System.currentTimeMillis();
 

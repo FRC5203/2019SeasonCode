@@ -13,6 +13,8 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.networktables.*;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 
@@ -25,13 +27,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
  */
 public class Robot extends TimedRobot {
 
-
-
     //The controller (not just a single joystick)
     public static Joystick stick = new Joystick(0);
-
-    //The chooser object that is used to put all possible autonomous modes into
-    SendableChooser<String> sendableChooser = new SendableChooser<>();
 
     //The variable that will be assigned to an actual autonomous mode instance class in autonomous init
     AutonomousMode autonomousMode;
@@ -49,18 +46,19 @@ public class Robot extends TimedRobot {
     * This function is run when the robot is first started up and should be used
     * for any initialization code.
     */
+    UsbCamera camera;
     @Override
     public void robotInit() {
 
+        //camera
+        camera = CameraServer.getInstance().startAutomaticCapture();
+        camera.setResolution(320, 240);
+        
         //Enable this only when not using pnuematics
-        Lotus.comp.setClosedLoopControl(false);
+        Lotus.comp.setClosedLoopControl(true);
         
         //Initialize the network table for team5203
         nTableInstance.startClientTeam(5203);
-        
-        sendableChooser.addOption("Cross the Line", "Line Cross");
-        sendableChooser.addOption("Rocketship", "Rocket");
-        sendableChooser.addOption("Cargo Ship", "Cargo");
 
         for(WPI_TalonSRX talon : new WPI_TalonSRX[]{Drive.frontLeft, Drive.rearLeft, Drive.frontRight, Drive.rearRight}){
             talon.configPeakCurrentLimit(30);
@@ -70,44 +68,36 @@ public class Robot extends TimedRobot {
         }
   
     }
-
+    
+    /**
+     * WARNING: Sendable chooser created null pointer error in competition!
+     * Only use it after extensive testing
+     */
     @Override
     public void autonomousInit() {
-        switch(sendableChooser.getSelected()){
-            case "Line Cross" : autonomousMode = new LineCrossAutonomous();
-            case "Rocketship" : autonomousMode = new RocketAutonomous();
-            case "Cargo Ship" : autonomousMode = new CargoAutonomous();
-            case "" : autonomousMode = new LineCrossAutonomous();
-        }
+        Lotus.open();
     }
-    //blah
+
     @Override
     public void autonomousPeriodic() {
         
-        //Boolean to determine if the one-time execution function in the autonomous mode was called
-        boolean singleExecuteWasCalled = false;
-
-        //If the the autonomous mode doesn't use looping and the execute() method is yet to be called, then call execute()
-        if(!autonomousMode.useLoopExecute && singleExecuteWasCalled){
-            autonomousMode.execute();
-            singleExecuteWasCalled = true;
-        }
-        else{
-            autonomousMode.loopExecute();
-        }
+        ControllerMap.registerInput();
     }
 
     @Override
     public void teleopInit() {
+
     }
 
     @Override
     public void teleopPeriodic() {
       
         ControllerMap.registerInput(); 
-        if(Elevator.runElevator){
+
+        //For moving the elevator up and down
+        /*if(Elevator.runElevator){
             Elevator.moveToTargetSwitch();
-        }
+        }*/
    
     }
 

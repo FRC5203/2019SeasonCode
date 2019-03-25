@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.Solenoid;
 public class Elevator{
     
     //Creating the solenoids that are plumbed to the pistons that control the tracks of the elevator
-    public static DoubleSolenoid track = new DoubleSolenoid(0,1);
+    public static DoubleSolenoid track = new DoubleSolenoid(4,5);
     //Creating the talons for the elevator motors
     public static WPI_VictorSPX elev1 = new WPI_VictorSPX(6);
 
@@ -30,10 +30,12 @@ public class Elevator{
 
     //Function to move the elevator forward on its track
     public static void extend(){
+        System.out.println("extending");
         track.set(DoubleSolenoid.Value.kForward);
     }
     //Function to move the robot backwards on its track
     public static void detract(){
+        System.out.println("detracting");
         track.set(DoubleSolenoid.Value.kReverse);
     }
 
